@@ -19,29 +19,39 @@ def triangleCoordinates(start, end, triangleSize = 5):
 ###################################################
 #                  Parameters 
 ###################################################
-clearance = 0
-print('Robot considered is Turtlebot 2:')
-print("Enter cleareance")
-clearance = float(input())
+# clearance = 0
+# print('Robot considered is Turtlebot 2:')
+# print("Enter cleareance")
+# clearance = float(input())
 # print("Enter radius")
 # radius = int(input())
 
-print('Enter start location s1 between -5 and 5')
-s1 = 5 + float(input())
-print('Enter start location s2 between -5 and 5')
-s2 = 10 - (5 + float(input()))
-print('Enter the angle of the robot in degrees')
-startOrientation = float(input())
+# print('Enter start location s1 between -5 and 5')
+# s1 = 5 + float(input())
+# print('Enter start location s2 between -5 and 5')
+# s2 = 5 - float(input())
+# print('Enter the angle of the robot in degrees')
+# startOrientation = float(input())
 
-print('Enter goal location g1 between -5 and 5')
-g1 = 5 + float(input())
-print('Enter goal location g2 between -5 and 5')
-g2 = 10 - (5 + float(input()))
+# print('Enter goal location g1 between -5 and 5')
+# g1 = 5 + float(input())
+# print('Enter goal location g2 between -5 and 5')
+# g2 = 5 - float(input())
 
-print('Enter left wheel rotational velocity')
-ul = int(input())
-print('Enter right wheel rotational velocity')
-ur = int(input())
+# print('Enter left wheel rotational velocity')
+# ul = int(input())
+# print('Enter right wheel rotational velocity')
+# ur = int(input())
+startOrientation = 15
+clearance = 0.1
+ul = 2
+ur = 2
+s1 = 5-5
+s2 = 5-5
+g1 = 5+2
+g2 = 5+1.5
+
+
 
 # Start time of simulation
 startTime = time.time()
@@ -101,7 +111,7 @@ pygame.draw.rect(gameDisplay,red,[scale*8.2,scale*4.2,scale*1.6,scale*1.6])
 nodesExplored = {}
 q = []
 
-if(not isSafe(startPosition,res,clearance + 0.038) or not isSafe(goalPosition,res,clearance + 0.038)):
+if(not isSafe(startPosition,res,0) or not isSafe(goalPosition,res,0)):
     pygame.draw.rect(gameDisplay,blue,(startPosition[0]*res*scale,startPosition[1]*res*scale, \
                                  res*2,res*2))
 
@@ -110,13 +120,13 @@ if(not isSafe(startPosition,res,clearance + 0.038) or not isSafe(goalPosition,re
 
     pygame.draw.rect(gameDisplay,white,(goalPosition[0]*res*scale,goalPosition[1]*res*scale, \
                                  res*2,res*2))
-    # basicfont = pygame.font.SysFont(None, 48)
-    # text = basicfont.render('Start or goal position must be in a valid workspace', True, (255, 0, 0), (255, 255, 255))
-    # textrect = text.get_rect()
-    # textrect.centerx = gameDisplay.get_rect().centerx
-    # textrect.centery = gameDisplay.get_rect().centery
+    basicfont = pygame.font.SysFont(None, 48)
+    text = basicfont.render('Start or goal position must be in a valid workspace', True, (255, 0, 0), (255, 255, 255))
+    textrect = text.get_rect()
+    textrect.centerx = gameDisplay.get_rect().centerx
+    textrect.centery = gameDisplay.get_rect().centery
  
-    # gameDisplay.blit(text, textrect)
+    gameDisplay.blit(text, textrect)
     pygame.display.update()
     pygame.time.delay(20000)
 

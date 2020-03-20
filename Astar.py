@@ -30,7 +30,7 @@ def isValidWorkspace(pt, r=1, radiusClearance=0):  # To be modified
     #                              Circle 3 pts
     # ------------------------------------------------------------------------------
     ptInCircle3 = (x - math.floor(5 / r)) ** 2 + (y - math.floor(5 / r)
-                                                  ) ** 2 - math.floor((2 + radiusClearance) / r) ** 2 <= 0
+                                                  ) ** 2 - math.floor((1 + radiusClearance) / r) ** 2 <= 0
 
     # ------------------------------------------------------------------------------
     #                              Circle 4 pts
@@ -57,14 +57,12 @@ def isValidWorkspace(pt, r=1, radiusClearance=0):  # To be modified
     # --------------------------------------------------------------------------------
     X = np.array([2.25, 3.75, 3.75, 2.25]) / r
     Y = np.array([1.25, 1.25, 1.75, 1.75]) / r
-    ptInRectangle = (y - Y[0]) >= ((Y[1] - Y[0]) / (X[1] - X[0])) * (x - X[0]) - \
-                  radiusClearance / r  and \
-                  0 <= (Y[2] - Y[1]) * (x - X[1]) + \
-                  radiusClearance / r  and \
-                  (y - Y[2]) <= ((Y[3] - Y[2]) / (X[3] - X[2])) * (x - X[2]) + \
-                  radiusClearance / r  and \
-                  0 >= (Y[0] - Y[3]) * (x - X[3]) - \
-                  radiusClearance / r 
+    ptInRectangle = y >= Y[0] - radiusClearance / r  and \
+                     0 >= (Y[2] - Y[1]) * (x - X[1]) - \
+                     radiusClearance / r  and \
+                    y <= Y[2]+ radiusClearance / r  and \
+                    0 >= (Y[0] - Y[3]) * (x - X[3]) + \
+                     radiusClearance / r 
 
     # --------------------------------------------------------------------------------
     #                             Square 1 pts
@@ -73,11 +71,11 @@ def isValidWorkspace(pt, r=1, radiusClearance=0):  # To be modified
     Y = np.array([4.2, 4.2, 5.8, 5.8])/r
     ptInSquare1 = (y - Y[0]) >= ((Y[1] - Y[0]) / (X[1] - X[0])) * (x - X[0]) - \
                   radiusClearance / r  and \
-                  0 <= (Y[2] - Y[1]) * (x - X[1]) + \
+                  0 >= (Y[2] - Y[1]) * (x - X[1]) - \
                   radiusClearance / r and \
                   (y - Y[2]) <= ((Y[3] - Y[2]) / (X[3] - X[2])) * (x - X[2]) + \
                   radiusClearance / r  and \
-                  0 >= (Y[0] - Y[3]) * (x - X[3]) - \
+                  0 <= (Y[0] - Y[3]) * (x - X[3]) + \
                   radiusClearance / r 
 
     # --------------------------------------------------------------------------------
@@ -87,11 +85,11 @@ def isValidWorkspace(pt, r=1, radiusClearance=0):  # To be modified
     Y = np.array([4.2, 4.2, 5.8, 5.8])/r
     ptInSquare2 = (y - Y[0]) >= ((Y[1] - Y[0]) / (X[1] - X[0])) * (x - X[0]) - \
                   radiusClearance / r and \
-                  0 <= (Y[2] - Y[1]) * (x - X[1]) + \
+                  0 >= (Y[2] - Y[1]) * (x - X[1]) - \
                   radiusClearance / r and \
                   (y - Y[2]) <= ((Y[3] - Y[2]) / (X[3] - X[2])) * (x - X[2]) + \
                   radiusClearance / r  and \
-                  0 >= (Y[0] - Y[3]) * (x - X[3]) - \
+                  0 <= (Y[0] - Y[3]) * (x - X[3]) + \
                   radiusClearance / r
 
     if ptInCircle1 or ptInCircle2 or ptInCircle3 or ptInCircle4 or ptInRectangle or ptInSquare1 or ptInSquare2:
@@ -122,9 +120,11 @@ def printPath(node):
 def normalize(startPosition, startOrientation):
     x, y = startPosition
     t = startOrientation
-    # x = round(x / threshDistance) * threshDistance
-    # y = round(y / threshDistance) * threshDistance
-    # t = round(t / threshAngle) * threshAngle
+    threshDistance = 0.1
+    threshAngle = 5
+    x = round(x / threshDistance) * threshDistance
+    y = round(y / threshDistance) * threshDistance
+    t = round(t / threshAngle) * threshAngle
     return [x, y, t]
 
 
@@ -208,8 +208,8 @@ def generatePath(q, startPosition, startOrientation, goalPosition, nodesExplored
 
 def constraints(X0, Y0, Theta0, UL, UR):
     t = 0
-    r = 0.0038  # Radius of the wheel is 0.038 meters
-    L = 0.009175  # Distance between the wheels is 0.3175 meters
+    r = 0.038  # Radius of the wheel is 0.038 meters
+    L = 0.2  # Distance between the wheels is 0.3175 meters
     dt = 0.1
     X1 = 0
     Y1 = 0
