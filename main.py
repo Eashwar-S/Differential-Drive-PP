@@ -6,35 +6,36 @@ import time
 ###################################################
 #                  Parameters 
 ###################################################
-clearance = 0
-print('Robot considered is Turtlebot 2:')
-print("Enter cleareance")
-clearance = float(input())
+# clearance = 0
+# print('Robot considered is Turtlebot 2:')
+# print("Enter cleareance")
+# clearance = float(input())
 
-print('Enter start location s1 between -5 and 5')
-s1 = 5 + float(input())
-print('Enter start location s2 between -5 and 5')
-s2 = 5 - float(input())
-print('Enter the angle of the robot in degrees')
-startOrientation = 360 - float(input())
+# print('Enter start location s1 between -5 and 5')
+# s1 = 5 + float(input())
+# print('Enter start location s2 between -5 and 5')
+# s2 = 5 - float(input())
+# print('Enter the angle of the robot in degrees')
+# startOrientation = 360 - float(input())
 
-print('Enter goal location g1 between -5 and 5')
-g1 = 5 + float(input())
-print('Enter goal location g2 between -5 and 5')
-g2 = 5 - float(input())
+# print('Enter goal location g1 between -5 and 5')
+# g1 = 5 + float(input())
+# print('Enter goal location g2 between -5 and 5')
+# g2 = 5 - float(input())
 
-print('Enter left wheel rotational velocity')
-ul = float(input())
-print('Enter right wheel rotational velocity')
-ur = float(input())
-# startOrientation = 360 - 180
-# clearance = 0.1
-# ul = 2
-# ur = 2
-# s1 = 5+4
-# s2 = 5-4
-# g1 = 5-5
-# g2 = 5-2
+# print('Enter left wheel rotational velocity')
+# ul = float(input())
+# print('Enter right wheel rotational velocity')
+# ur = float(input())
+
+startOrientation = 360 - 15
+clearance = 0.1
+ul = 2
+ur = 2
+s1 = 5+(-4)
+s2 = 5-(4)
+g1 = 5+(5)
+g2 = 5-(-5)
 
 
 def triangleCoordinates(start, end, triangleSize = 5):
