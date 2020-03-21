@@ -90,9 +90,8 @@ def printPath(node):
 
 
 # Normalizing angle and step size 
-def normalize(startPosition, startOrientation,threshDistance ,threshAngle):
-    x, y = startPosition
-    t = startOrientation
+def normalize(coor,threshDistance ,threshAngle):
+    x, y,t = coor
     x = round(x / threshDistance) * threshDistance
     y = round(y / threshDistance) * threshDistance
     t = round(t / threshAngle) * threshAngle
@@ -101,16 +100,16 @@ def normalize(startPosition, startOrientation,threshDistance ,threshAngle):
 
 # CalcrobotParams[0]ating the Euclidean distance
 def distance(startPosition, goalPosition):
-    sx, sy = startPosition
-    gx, gy = goalPosition
+    sx, sy,_ = startPosition
+    gx, gy,_ = goalPosition
     return math.sqrt((gx - sx) ** 2 + (gy - sy) ** 2)
 
 # generates optimal path for robot
-def generatePath(q, startPosition, startOrientation, goalPosition, nodesExplored,robotParams,dt,radiusClearance,threshDistance = 0.1,threshAngle = 5):
+def generatePath(q, startEndCoor, nodesExplored,robotParams,dt,radiusClearance,threshDistance = 0.1,threshAngle = 5):
 
     # normalize goal and start positions
-    sx, sy, st = normalize(startPosition, startOrientation,threshDistance,threshAngle)
-    gx, gy, gt = normalize(goalPosition, 0,threshDistance,threshAngle)
+    sx, sy, st = normalize(startEndCoor[0],threshDistance,threshAngle)
+    gx, gy, gt = normalize(startEndCoor[1],threshDistance,threshAngle)
 
     # Initializing root node
     key = str(sx) + str(sy) + str(st)
@@ -123,7 +122,7 @@ def generatePath(q, startPosition, startOrientation, goalPosition, nodesExplored
     while (len(q) > 0):
         _, _, currentNode = heapq.heappop(q)
 
-        if (distance(currentNode.state[0:2], goalPosition) <= 0.3):
+        if (distance(currentNode.state, [gx,gy,gt]) <= 0.3):
             sol = printPath(currentNode)
             return [True, sol]
 
@@ -150,13 +149,13 @@ def generatePath(q, startPosition, startOrientation, goalPosition, nodesExplored
                 newPosX, newPosY, newOrientation = constraints(x, y, t, robotParams[1], robotParams[0], robotParams,dt)
            
  
-            newState = np.array(normalize([newPosX,newPosY],newOrientation,threshDistance,threshAngle))            
+            newState = np.array(normalize([newPosX,newPosY,newOrientation],threshDistance,threshAngle))            
             s = str(newState[0]) + str(newState[1]) + str(newState[2])
 
             if (s not in nodesExplored):
                 if (isSafe(newState, 1, radiusClearance)):
                     newCostToCome = currentNode.costToCome + threshDistance
-                    newCost = newCostToCome + distance([newPosX, newPosY], [gx, gy])
+                    newCost = newCostToCome + distance(newState, [gx, gy,gt])
 
                     newNode = Node(newState, newCost, newCostToCome, currentNode)
                     nodesExplored[s] = newNode
@@ -164,9 +163,9 @@ def generatePath(q, startPosition, startOrientation, goalPosition, nodesExplored
                     heapq.heappush(q, (newNode.cost, count, newNode))
                     count += 1
             else:
-                if (nodesExplored[s].cost > currentNode.costToCome + threshDistance+ distance([newPosX, newPosY], [gx, gy])):
+                if (nodesExplored[s].cost > currentNode.costToCome + threshDistance+ distance(newState, [gx, gy,gt])):
                     nodesExplored[s].costToCome = currentNode.costToCome + threshDistance
-                    nodesExplored[s].cost = nodesExplored[s].costToCome + distance([newPosX, newPosY], [gx, gy])
+                    nodesExplored[s].cost = nodesExplored[s].costToCome + distance(newState, [gx, gy,gt])
                     nodesExplored[s].parent = currentNode
 
     return [False, None]

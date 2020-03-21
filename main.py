@@ -4,7 +4,6 @@ from Astar import *
 import time
 
 
-
 def triangleCoordinates(start, end, triangleSize = 5):
     
     rotation = (math.atan2(start[1] - end[1], end[0] - start[0])) + math.pi/2
@@ -92,8 +91,10 @@ gameDisplay = pygame.display.set_mode((size_x*scale,size_y*scale))
 #----------------------------
 # Start and goal coordinates
 #----------------------------
-startPosition = np.float32((np.float32([s1,s2]))/res)
-goalPosition = np.float32((np.float32([g1,g2]))/res)
+startCoor = np.float32((np.float32([s1,s2,startOrientation]))/res)
+goalCoor = np.float32((np.float32([g1,g2,0]))/res)
+
+startEndCoor = [startCoor,goalCoor]
 startTime = time.time()  # Start time of simulation
 
 
@@ -124,14 +125,14 @@ pygame.draw.rect(gameDisplay,red,[scale*8.2,scale*4.2,scale*1.6,scale*1.6])
 nodesExplored = {}
 q = []
 
-if(not isSafe(startPosition,res,clearance + robotRadius) or not isSafe(goalPosition,res,clearance + robotRadius)):
-    pygame.draw.rect(gameDisplay,blue,(startPosition[0]*res*scale,startPosition[1]*res*scale, \
+if(not isSafe(startCoor,res,clearance + robotRadius) or not isSafe(goalCoor,res,clearance + robotRadius)):
+    pygame.draw.rect(gameDisplay,blue,(startCoor[0]*res*scale,startCoor[1]*res*scale, \
                                  res*2,res*2))
 
-    pygame.draw.circle(gameDisplay,blue,(int(goalPosition[0]*res*scale),int(goalPosition[1]*res*scale)), \
+    pygame.draw.circle(gameDisplay,blue,(int(goalCoor[0]*res*scale),int(goalCoor[1]*res*scale)), \
                                   math.floor(0.3*res*scale))
 
-    pygame.draw.rect(gameDisplay,white,(goalPosition[0]*res*scale,goalPosition[1]*res*scale, \
+    pygame.draw.rect(gameDisplay,white,(goalCoor[0]*res*scale,goalCoor[1]*res*scale, \
                                  res*2,res*2))
     basicfont = pygame.font.SysFont(None, 48)
     text = basicfont.render('Start or goal position must be in a valid workspace', True, (255, 0, 0), (255, 255, 255))
@@ -145,7 +146,7 @@ if(not isSafe(startPosition,res,clearance + robotRadius) or not isSafe(goalPosit
 
 else:
     print('Exploring nodes...')
-    success,solution = generatePath(q,startPosition,startOrientation,goalPosition,nodesExplored,robotParams,dt,clearance+robotRadius,threshDistance,threshAngle)
+    success,solution = generatePath(q,startEndCoor,nodesExplored,robotParams,dt,clearance+robotRadius,threshDistance,threshAngle)
     # print(solution)
     # End of simulation
     endTime= time.time()
@@ -180,13 +181,13 @@ else:
                     pygame.draw.polygon(gameDisplay, green,[tuple(triangle[0]),tuple(triangle[1]),tuple(triangle[2])])
 
                 #draw start and goal locations
-                pygame.draw.rect(gameDisplay,blue,(startPosition[0]*res*scale,startPosition[1]*res*scale, \
+                pygame.draw.rect(gameDisplay,blue,(startCoor[0]*res*scale,startCoor[1]*res*scale, \
                                  res*2,res*2))
 
-                pygame.draw.circle(gameDisplay,blue,(int(goalPosition[0]*res*scale),int(goalPosition[1]*res*scale)), \
+                pygame.draw.circle(gameDisplay,blue,(int(goalCoor[0]*res*scale),int(goalCoor[1]*res*scale)), \
                                   math.floor(0.3*res*scale))
 
-                pygame.draw.rect(gameDisplay,white,(goalPosition[0]*res*scale,goalPosition[1]*res*scale, \
+                pygame.draw.rect(gameDisplay,white,(goalCoor[0]*res*scale,goalCoor[1]*res*scale, \
                                  res*2,res*2))
                 pygame.display.update()
            
