@@ -9,7 +9,7 @@ import math
 ######################################
 #          Workspace
 ######################################
-def isValidWorkspace(pt, r=1, radiusClearance=0.0):  
+def isValidWorkspace(pt, r, radiusClearance):  
     x, y = pt
 
     # ------------------------------------------------------------------------------
@@ -90,12 +90,12 @@ def printPath(node):
 
 
 # Normalizing angle and step size 
-def normalize(startPosition, startOrientation,threshDistance = 0.4,threshAngle = 30):
+def normalize(startPosition, startOrientation,threshDistance ,threshAngle):
     x, y = startPosition
     t = startOrientation
-    x = (x / threshDistance) * threshDistance
-    y = (y / threshDistance) * threshDistance
-    t = (t / threshAngle) * threshAngle
+    x = np.round(x / threshDistance) * threshDistance
+    y = np.round(y / threshDistance) * threshDistance
+    t = np.round(t / threshAngle) * threshAngle
     return [x, y, t]
 
 
@@ -107,11 +107,11 @@ def distance(startPosition, goalPosition):
 
 
 # generates optimal path for robot
-def generatePath(q, startPosition, startOrientation, goalPosition, nodesExplored, ul, ur, radiusClearance,threshDistance = 0.5,threshAngle = 15):
+def generatePath(q, startPosition, startOrientation, goalPosition, nodesExplored, ul, ur, radiusClearance,threshDistance = 0.4,threshAngle = 15):
 
     # normalize goal and start positions
-    sx, sy, st = normalize(startPosition, startOrientation)
-    gx, gy, gt = normalize(goalPosition, 0)
+    sx, sy, st = normalize(startPosition, startOrientation,threshDistance,threshAngle)
+    gx, gy, gt = normalize(goalPosition, 0,threshDistance,threshAngle)
 
     # Initializing root node
     key = str(sx) + str(sy) + str(st)
@@ -127,6 +127,11 @@ def generatePath(q, startPosition, startOrientation, goalPosition, nodesExplored
         if (distance(currentNode.state[0:2], goalPosition) <= 0.3):
             sol = printPath(currentNode)
             return [True, sol]
+
+        print("==================")
+        print(currentNode.state)
+        print("==================")
+        print(" ")
 
         for actions in range(8):
             x, y, t = currentNode.state
@@ -183,8 +188,33 @@ def constraints(X0, Y0, Theta0, UL, UR, radiusClearance):
     dtheta = (r / L) * (UR - UL) * dt
     Xn = X0 + dx
     Yn = Y0 + dy
-    Thetan = Theta0 +  dtheta
+    Thetan = (Theta0 +  dtheta)%360
     return Xn, Yn, Thetan
+
+
+
+
+
+
+if __name__ == "__main__":
+    startOrientation = 360 - 15
+    clearance = 0.1
+    q = []
+    ul = 2
+    ur = 2
+    s1 = 5+(-4)
+    s2 = 5-(4)
+    g1 = 5+(-5)
+    g2 = 5-(5)
+    nodesExplored = {}
+    res = 1
+
+    startPosition = np.float32((np.float32([s1,s2]))/res)
+    goalPosition = np.float32((np.float32([g1,g2]))/res)
+
+    generatePath(q,startPosition,startOrientation,goalPosition,nodesExplored,ul, ur,clearance+0.038) 
+
+
 
 
 

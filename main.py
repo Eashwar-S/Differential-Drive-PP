@@ -34,8 +34,8 @@ ul = 2
 ur = 2
 s1 = 5+(-4)
 s2 = 5-(4)
-g1 = 5+(5)
-g2 = 5-(-5)
+g1 = 5+(-5)
+g2 = 5-(5)
 
 
 def triangleCoordinates(start, end, triangleSize = 5):
@@ -152,8 +152,9 @@ else:
 
                     # draw explored nodes
                     pygame.draw.line(gameDisplay,white,(x2,y2),(x,y),1)
-                    triangle = triangleCoordinates([x2,y2],[x,y],5)
-                    pygame.draw.polygon(gameDisplay, green,[tuple(triangle[0]),tuple(triangle[1]),tuple(triangle[2])])
+                    pygame.draw.circle(gameDisplay,green,(int(x),int(y)),4)
+                    # triangle = triangleCoordinates([x2,y2],[x,y],5)
+                    # pygame.draw.polygon(gameDisplay, green,[tuple(triangle[0]),tuple(triangle[1]),tuple(triangle[2])])
 
                 #draw start and goal locations
                 pygame.draw.rect(gameDisplay,blue,(startPosition[0]*res*scale,startPosition[1]*res*scale, \
@@ -176,7 +177,7 @@ else:
                 pygame.draw.line(gameDisplay,yellow,(xt,yt),(x,y),3)
                 pygame.draw.circle(gameDisplay,red,(int(x),int(y)),4)
                 pygame.display.update()
-            pygame.time.delay(4000)
+            pygame.time.delay(80000)
             draw = False
 
     else:
