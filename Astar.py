@@ -93,9 +93,9 @@ def printPath(node):
 def normalize(startPosition, startOrientation,threshDistance ,threshAngle):
     x, y = startPosition
     t = startOrientation
-    x = np.round(x / threshDistance) * threshDistance
-    y = np.round(y / threshDistance) * threshDistance
-    t = np.round(t / threshAngle) * threshAngle
+    x = round(x / threshDistance) * threshDistance
+    y = round(y / threshDistance) * threshDistance
+    t = round(t / threshAngle) * threshAngle
     return [x, y, t]
 
 
