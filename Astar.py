@@ -99,15 +99,14 @@ def normalize(startPosition, startOrientation,threshDistance ,threshAngle):
     return [x, y, t]
 
 
-# Calculating the Euclidean distance
+# CalcrobotParams[0]ating the Euclidean distance
 def distance(startPosition, goalPosition):
     sx, sy = startPosition
     gx, gy = goalPosition
     return math.sqrt((gx - sx) ** 2 + (gy - sy) ** 2)
 
-
 # generates optimal path for robot
-def generatePath(q, startPosition, startOrientation, goalPosition, nodesExplored, ul, ur, radiusClearance,threshDistance = 0.4,threshAngle = 15):
+def generatePath(q, startPosition, startOrientation, goalPosition, nodesExplored,robotParams,dt,radiusClearance,threshDistance = 0.1,threshAngle = 5):
 
     # normalize goal and start positions
     sx, sy, st = normalize(startPosition, startOrientation,threshDistance,threshAngle)
@@ -128,31 +127,27 @@ def generatePath(q, startPosition, startOrientation, goalPosition, nodesExplored
             sol = printPath(currentNode)
             return [True, sol]
 
-        print("==================")
-        print(currentNode.state)
-        print("==================")
-        print(" ")
 
         for actions in range(8):
             x, y, t = currentNode.state
             
             # Defining actions based on constraints
             if actions == 0:
-                newPosX, newPosY, newOrientation = constraints(x, y, t, 0, ul, radiusClearance)
+                newPosX, newPosY, newOrientation = constraints(x, y, t, 0, robotParams[0],robotParams, dt)
             elif actions == 1:
-                newPosX, newPosY, newOrientation = constraints(x, y, t, ul, 0, radiusClearance)
+                newPosX, newPosY, newOrientation = constraints(x, y, t, robotParams[0], 0,robotParams,dt)
             elif actions == 2:
-                newPosX, newPosY, newOrientation = constraints(x, y, t, ul, ul, radiusClearance)
+                newPosX, newPosY, newOrientation = constraints(x, y, t, robotParams[0], robotParams[0],robotParams,dt)
             elif actions == 3:
-                newPosX, newPosY, newOrientation = constraints(x, y, t, 0, ur, radiusClearance)
+                newPosX, newPosY, newOrientation = constraints(x, y, t, 0, robotParams[1],robotParams,dt)
             elif actions == 4:
-                newPosX, newPosY, newOrientation = constraints(x, y, t, ur, 0, radiusClearance)
+                newPosX, newPosY, newOrientation = constraints(x, y, t, robotParams[1], 0, robotParams,dt)
             elif actions == 5:
-                newPosX, newPosY, newOrientation = constraints(x, y, t, ur, ur, radiusClearance)
+                newPosX, newPosY, newOrientation = constraints(x, y, t, robotParams[1], robotParams[1], robotParams,dt)
             elif actions == 6:
-                newPosX, newPosY, newOrientation = constraints(x, y, t, ul, ur, radiusClearance)
+                newPosX, newPosY, newOrientation = constraints(x, y, t, robotParams[0], robotParams[1], robotParams,dt)
             elif actions == 7:
-                newPosX, newPosY, newOrientation = constraints(x, y, t, ur, ul, radiusClearance)
+                newPosX, newPosY, newOrientation = constraints(x, y, t, robotParams[1], robotParams[0], robotParams,dt)
            
  
             newState = np.array(normalize([newPosX,newPosY],newOrientation,threshDistance,threshAngle))            
@@ -173,14 +168,14 @@ def generatePath(q, startPosition, startOrientation, goalPosition, nodesExplored
                     nodesExplored[s].costToCome = currentNode.costToCome + threshDistance
                     nodesExplored[s].cost = nodesExplored[s].costToCome + distance([newPosX, newPosY], [gx, gy])
                     nodesExplored[s].parent = currentNode
+
     return [False, None]
 
 
 # Functions which defines actions considering the constraints
-def constraints(X0, Y0, Theta0, UL, UR, radiusClearance):
-    r = 0.038       # Radius of the wheel  
-    L = 0.0975      # Distance between the wheels  
-    dt = 15
+def constraints(X0, Y0,Theta0,UL,UR,robotParams,dt):
+    r = robotParams[2]        # Radius of the wheel  
+    L = robotParams[3]        # Distance between the wheels  
 
     dx = r/2 * (UL + UR) * math.cos(math.radians(Theta0)) * dt
     dy = r/2 * (UL + UR) * math.sin(math.radians(Theta0)) * dt
@@ -192,27 +187,24 @@ def constraints(X0, Y0, Theta0, UL, UR, radiusClearance):
     return Xn, Yn, Thetan
 
 
-
-
-
-
 if __name__ == "__main__":
-    startOrientation = 360 - 15
-    clearance = 0.1
-    q = []
-    ul = 2
-    ur = 2
-    s1 = 5+(-4)
-    s2 = 5-(4)
-    g1 = 5+(-5)
-    g2 = 5-(5)
-    nodesExplored = {}
-    res = 1
+    pass
+    # startOrientation = 360 - 15
+    # clearance = 0.1
+    # q = []
+    # ul = 2
+    # ur = 2
+    # s1 = 5+(-4)
+    # s2 = 5-(4)
+    # g1 = 5+(-5)
+    # g2 = 5-(5)
+    # nodesExplored = {}
+    # res = 1
 
-    startPosition = np.float32((np.float32([s1,s2]))/res)
-    goalPosition = np.float32((np.float32([g1,g2]))/res)
+    # startPosition = np.float32((np.float32([s1,s2]))/res)
+    # goalPosition = np.float32((np.float32([g1,g2]))/res)
 
-    generatePath(q,startPosition,startOrientation,goalPosition,nodesExplored,ul, ur,clearance+0.038) 
+    # generatePath(q,startPosition,startOrientation,goalPosition,nodesExplored,ul, ur,clearance+0.038) 
 
 
 

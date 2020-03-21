@@ -3,9 +3,27 @@ import numpy as np
 from Astar import *
 import time
 
+
+
+def triangleCoordinates(start, end, triangleSize = 5):
+    
+    rotation = (math.atan2(start[1] - end[1], end[0] - start[0])) + math.pi/2
+    # print(math.atan2(start[1] - end[1], end[0] - start[0]))
+    rad = math.pi/180
+
+    coordinateList = np.array([[end[0],end[1]],
+                              [end[0] + triangleSize * math.sin(rotation - 165*rad), end[1] + triangleSize * math.cos(rotation - 165*rad)],
+                              [end[0] + triangleSize * math.sin(rotation + 165*rad), end[1] + triangleSize * math.cos(rotation + 165*rad)]])
+
+    return coordinateList
+
+
 ###################################################
 #                  Parameters 
 ###################################################
+#------------------------------
+#  Getting user Inputs
+#------------------------------
 # clearance = 0
 # print('Robot considered is Turtlebot 2:')
 # print("Enter cleareance")
@@ -26,41 +44,39 @@ import time
 # print('Enter left wheel rotational velocity')
 # ul = float(input())
 # print('Enter right wheel rotational velocity')
-# ur = float(input())
+# ur = float(ijput())
 
 startOrientation = 360 - 15
-clearance = 0.1
-ul = 2
-ur = 2
+ul = 3
+ur = 3
 s1 = 5+(-4)
 s2 = 5-(4)
 g1 = 5+(-5)
-g2 = 5-(5)
+g2 = 5-(-5)
 
+#---------------------------
+#  Precision Parameters
+#---------------------------
+threshAngle = 5
+threshDistance = 0.1
+clearance = 0.2
+dt = 5  #time step
 
-def triangleCoordinates(start, end, triangleSize = 5):
-    
-    rotation = (math.atan2(start[1] - end[1], end[0] - start[0])) + math.pi/2
-    # print(math.atan2(start[1] - end[1], end[0] - start[0]))
-    rad = math.pi/180
+#---------------------------
+#  Robot parameters
+#---------------------------
+wheelDist = 0.03175
+radius = 0.038
+robotParams = [ul,ur,radius,wheelDist]
+robotRadius = 0.177
 
-    coordinateList = np.array([[end[0],end[1]],
-                              [end[0] + triangleSize * math.sin(rotation - 165*rad), end[1] + triangleSize * math.cos(rotation - 165*rad)],
-                              [end[0] + triangleSize * math.sin(rotation + 165*rad), end[1] + triangleSize * math.cos(rotation + 165*rad)]])
-
-    return coordinateList
-# Start time of simulation
-startTime = time.time()
+#----------------------------
+#  Display parameters
+#----------------------------
+pygame.init()
 
 res = 1.0 #resolution of grid 
 scale = 80 #scale of grid
-
-
-startPosition = np.float32((np.float32([s1,s2]))/res)
-goalPosition = np.float32((np.float32([g1,g2]))/res)
-
-
-pygame.init()
 
 white = (255,255,255)
 black = (0,0,0)
@@ -72,6 +88,13 @@ yellow = (255,255,0)
 size_x = 10
 size_y = 10
 gameDisplay = pygame.display.set_mode((size_x*scale,size_y*scale))
+
+#----------------------------
+# Start and goal coordinates
+#----------------------------
+startPosition = np.float32((np.float32([s1,s2]))/res)
+goalPosition = np.float32((np.float32([g1,g2]))/res)
+startTime = time.time()  # Start time of simulation
 
 
 ############################################################
@@ -101,7 +124,7 @@ pygame.draw.rect(gameDisplay,red,[scale*8.2,scale*4.2,scale*1.6,scale*1.6])
 nodesExplored = {}
 q = []
 
-if(not isSafe(startPosition,res,clearance + 0.028) or not isSafe(goalPosition,res,clearance + 0.028)):
+if(not isSafe(startPosition,res,clearance + robotRadius) or not isSafe(goalPosition,res,clearance + robotRadius)):
     pygame.draw.rect(gameDisplay,blue,(startPosition[0]*res*scale,startPosition[1]*res*scale, \
                                  res*2,res*2))
 
@@ -122,7 +145,7 @@ if(not isSafe(startPosition,res,clearance + 0.028) or not isSafe(goalPosition,re
 
 else:
     print('Exploring nodes...')
-    success,solution = generatePath(q,startPosition,startOrientation,goalPosition,nodesExplored,ul, ur,clearance+0.038)
+    success,solution = generatePath(q,startPosition,startOrientation,goalPosition,nodesExplored,robotParams,dt,clearance+robotRadius,threshDistance,threshAngle)
     # print(solution)
     # End of simulation
     endTime= time.time()
@@ -152,9 +175,9 @@ else:
 
                     # draw explored nodes
                     pygame.draw.line(gameDisplay,white,(x2,y2),(x,y),1)
-                    pygame.draw.circle(gameDisplay,green,(int(x),int(y)),4)
-                    # triangle = triangleCoordinates([x2,y2],[x,y],5)
-                    # pygame.draw.polygon(gameDisplay, green,[tuple(triangle[0]),tuple(triangle[1]),tuple(triangle[2])])
+                    # pygame.draw.circle(gameDisplay,green,(int(x),int(y)),4)
+                    triangle = triangleCoordinates([x2,y2],[x,y],5)
+                    pygame.draw.polygon(gameDisplay, green,[tuple(triangle[0]),tuple(triangle[1]),tuple(triangle[2])])
 
                 #draw start and goal locations
                 pygame.draw.rect(gameDisplay,blue,(startPosition[0]*res*scale,startPosition[1]*res*scale, \
