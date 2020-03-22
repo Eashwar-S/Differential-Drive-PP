@@ -50,8 +50,8 @@ ul = 3
 ur = 2
 s1 = 5+(-4)
 s2 = 5-(4)
-g1 = 5+(3.5)
-g2 = 5-(-1.5)
+g1 = 5+(4)
+g2 = 5-(-4)
 
 #---------------------------
 #  Precision Parameters
@@ -74,8 +74,9 @@ robotRadius = 0.177
 #----------------------------
 pygame.init()
 
-res = 1.0 #resolution of grid 
+res = 1.0  #resolution of grid 
 scale = 80 #scale of grid
+
 
 white = (255,255,255)
 black = (0,0,0)
@@ -95,7 +96,6 @@ startCoor = np.float32((np.float32([s1,s2,startOrientation]))/res)
 goalCoor = np.float32((np.float32([g1,g2,0]))/res)
 
 startEndCoor = [startCoor,goalCoor]
-startTime = time.time()  # Start time of simulation
 
 
 ############################################################
@@ -145,6 +145,7 @@ if(not isSafe(startCoor,res,clearance + robotRadius) or not isSafe(goalCoor,res,
     pygame.time.delay(2000)
 
 else:
+    startTime = time.time()  # Start time of simulation
     print('Exploring nodes...')
     success,solution = generatePath(q,startEndCoor,nodesExplored,robotParams,dt,clearance+robotRadius,threshDistance,threshAngle)
     # print(solution)

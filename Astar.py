@@ -164,7 +164,7 @@ def generatePath(q, startEndCoor, nodesExplored,robotParams,dt,radiusClearance,t
 
             if (s not in nodesExplored):
                 if (isSafe(newState, 1, radiusClearance) and pathIsSafe(newState,currentNode.state,radiusClearance)):
-                    newCostToCome = currentNode.costToCome + threshDistance
+                    newCostToCome = currentNode.costToCome + distance(newState,currentNode.state) 
                     newCost = newCostToCome + distance(newState, [gx, gy,gt])
 
                     newNode = Node(newState, newCost, newCostToCome, currentNode)
@@ -173,11 +173,10 @@ def generatePath(q, startEndCoor, nodesExplored,robotParams,dt,radiusClearance,t
                     heapq.heappush(q, (newNode.cost, count, newNode))
                     count += 1
             else:
-                if (nodesExplored[s].cost > currentNode.costToCome + threshDistance+ distance(newState, [gx, gy,gt])):
-                    nodesExplored[s].costToCome = currentNode.costToCome + threshDistance
+                if (nodesExplored[s].cost > currentNode.costToCome + distance(newState,currentNode.state)+ distance(newState, [gx, gy,gt])):
+                    nodesExplored[s].costToCome = currentNode.costToCome + distance(newState,currentNode.state) 
                     nodesExplored[s].cost = nodesExplored[s].costToCome + distance(newState, [gx, gy,gt])
                     nodesExplored[s].parent = currentNode
-
     return [False, None]
 
 
