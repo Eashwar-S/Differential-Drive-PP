@@ -45,13 +45,13 @@ def triangleCoordinates(start, end, triangleSize = 5):
 # print('Enter right wheel rotational velocity')
 # ur = float(ijput())
 
-startOrientation = 360 - 15
+startOrientation = 360 - 0
 ul = 3
-ur = 3
+ur = 2
 s1 = 5+(-4)
 s2 = 5-(4)
-g1 = 5+(-5)
-g2 = 5-(-5)
+g1 = 5+(3.5)
+g2 = 5-(-1.5)
 
 #---------------------------
 #  Precision Parameters
@@ -65,8 +65,8 @@ dt = 5  #time step
 #  Robot parameters
 #---------------------------
 wheelDist = 0.03175
-radius = 0.038
-robotParams = [ul,ur,radius,wheelDist]
+wheelRadius = 0.038
+robotParams = [ul,ur,wheelRadius,wheelDist]
 robotRadius = 0.177
 
 #----------------------------
@@ -201,7 +201,7 @@ else:
                 pygame.draw.line(gameDisplay,yellow,(xt,yt),(x,y),3)
                 pygame.draw.circle(gameDisplay,red,(int(x),int(y)),4)
                 pygame.display.update()
-            pygame.time.delay(80000)
+            pygame.time.delay(4000)
             draw = False
 
     else:

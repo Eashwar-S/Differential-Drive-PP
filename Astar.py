@@ -79,6 +79,16 @@ def isSafe(newState, r, radiusClearance):
     return isValidWorkspace(newState[0:2], r, radiusClearance)
 
 
+def pathIsSafe(pt1,pt2,radiusClearance):
+    t = np.arange(0.3, 1.0, 0.3)
+    v = pt2 - pt1
+    for i in range(len(t)):
+        r = (t[i]*v + pt1)[0:2]
+        if( not isSafe(r,1,radiusClearance)):
+            return False
+    return True
+
+
 # prints solution path
 def printPath(node):
     l = []
@@ -153,7 +163,7 @@ def generatePath(q, startEndCoor, nodesExplored,robotParams,dt,radiusClearance,t
             s = str(newState[0]) + str(newState[1]) + str(newState[2])
 
             if (s not in nodesExplored):
-                if (isSafe(newState, 1, radiusClearance)):
+                if (isSafe(newState, 1, radiusClearance) and pathIsSafe(newState,currentNode.state,radiusClearance)):
                     newCostToCome = currentNode.costToCome + threshDistance
                     newCost = newCostToCome + distance(newState, [gx, gy,gt])
 
@@ -184,6 +194,9 @@ def constraints(X0, Y0,Theta0,UL,UR,robotParams,dt):
     Yn = Y0 + dy
     Thetan = (Theta0 +  dtheta)%360
     return Xn, Yn, Thetan
+
+
+
 
 
 if __name__ == "__main__":
