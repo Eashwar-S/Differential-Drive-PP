@@ -16,6 +16,27 @@ def triangleCoordinates(start, end, triangleSize = 5):
 
     return coordinateList
 
+def setPrecisionParameters(UL, UR):
+    threshAngle = 0
+    dt = 0
+    if max(UL,UR) <= 1:
+        threshAngle = 5
+        dt = 10
+    elif (max(UL,UR) > 1 and max(UL,UR) <= 5):
+        if UL == UR == 4:
+            threshAngle = 15
+            dt = 4
+        elif UL == UR == 5:
+            threshAngle = 15
+            dt = 3
+        else:
+            threshAngle = 15
+            dt = 5
+    else:
+        threshAngle = 15
+        dt = 2.5
+    return threshAngle,dt
+
 
 ###################################################
 #                  Parameters 
@@ -46,8 +67,8 @@ def triangleCoordinates(start, end, triangleSize = 5):
 # ur = float(ijput())
 
 startOrientation = 360 - 15
-ul = 2
-ur = 2
+ul = 0.5
+ur = 0.8
 s1 = 5+(2)
 s2 = 5-(1)
 g1 = 5+(-5)
@@ -56,11 +77,9 @@ g2 = 5-(-5)
 #---------------------------
 #  Precision Parameters
 #---------------------------
-threshAngle = 1
 threshDistance = 0.1
-clearance = 0.3
-dt = 4  #time step
-
+clearance = 0.2
+threshAngle, dt = setPrecisionParameters(ul, ur)
 #---------------------------
 #  Robot parameters
 #---------------------------
