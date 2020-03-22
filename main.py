@@ -45,21 +45,21 @@ def triangleCoordinates(start, end, triangleSize = 5):
 # print('Enter right wheel rotational velocity')
 # ur = float(ijput())
 
-startOrientation = 360 - 0
-ul = 3
+startOrientation = 360 - 15
+ul = 2
 ur = 2
-s1 = 5+(-4)
-s2 = 5-(4)
-g1 = 5+(4)
-g2 = 5-(-4)
+s1 = 5+(2)
+s2 = 5-(1)
+g1 = 5+(-5)
+g2 = 5-(-5)
 
 #---------------------------
 #  Precision Parameters
 #---------------------------
-threshAngle = 5
+threshAngle = 1
 threshDistance = 0.1
-clearance = 0.2
-dt = 5  #time step
+clearance = 0.3
+dt = 4  #time step
 
 #---------------------------
 #  Robot parameters
