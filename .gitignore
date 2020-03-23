@@ -129,5 +129,6 @@ dmypy.json
 .pyre/
 
 # Ignore build and devel files
-.catkin_ws/build/
-.catkin_ws/devel/
+./catkin_ws/build/
+./catkin_ws/devel/
+
