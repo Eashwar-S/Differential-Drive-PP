@@ -38,6 +38,12 @@ def setPrecisionParameters(UL, UR):
     return threshAngle,dt
 
 
+def writeSolutionToFile(solution):
+    # Writing all explored nodes in text file.
+    sol = np.array(solution)
+    np.savetxt('/home/ak/Differential-Drive-PP/code/solution.txt',sol, delimiter=',')
+
+
 ###################################################
 #                  Parameters 
 ###################################################
@@ -67,12 +73,12 @@ def setPrecisionParameters(UL, UR):
 # ur = float(ijput())
 
 startOrientation = 360 - 15
-ul = 0.5
-ur = 0.8
+ul = 1
+ur = 1
 s1 = 5+(2)
 s2 = 5-(1)
-g1 = 5+(-5)
-g2 = 5-(-5)
+g1 = 5+(2)
+g2 = 5-(-1)
 
 #---------------------------
 #  Precision Parameters
@@ -167,25 +173,23 @@ else:
     startTime = time.time()  # Start time of simulation
     print('Exploring nodes...')
     success,solution = generatePath(q,startEndCoor,nodesExplored,robotParams,dt,clearance+robotRadius,threshDistance,threshAngle)
-    print(solution)
-    # End of simulation
     endTime= time.time()
-    if success:
-        print('Optimal path found')
-        print("Total time taken for exploring nodes "+ str(endTime-startTime) +" seconds.")
-    else:
-        print('Path not possible')
+    
     #############################################
     #      Drawing 
     #############################################
     if(success):
+        print('Optimal path found')
+        print("Total time taken for exploring nodes "+ str(endTime-startTime) +" seconds.")
+        writeSolutionToFile(solution)
+
         draw = True
         while draw:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
-            
+             
             #draw nodesExplored
             for s in nodesExplored:
                 if(nodesExplored[s].parent):
@@ -211,34 +215,20 @@ else:
                                  res*2,res*2))
                 pygame.display.update()
            
-            # Writing all explored nodes in text file.
-            position = open("Positions.txt","w")
             # draw solution path
             for i in range(len(solution)-2,-1,-1):
                 pt = solution[i][0:2]
                 pt1 = solution[i+1][0:2]
-                angle = solution[i][2:3]
-                angle1 = solution[i+1][2:3]
-                if i!= len(solution)-3:
-                    position.write(str(solution[i][0]) + " " + str(solution[i][1])+ " "+str(solution[i][2]))
-                    position.write("\n")
-                else:
-                    position.write(str(solution[i][0]) + " " + str(solution[i][1])+ " "+str(solution[i][2]))
-                    position.write("\n")
-                    position.write(str(solution[i+1][0]) + " " + str(solution[i+1][1])+ " "+str(solution[i+1][2]))
-                    position.write("\n")
-                    position.write(str(solution[i+2][0]) + " " + str(solution[i+2][1])+ " "+str(solution[i+2][2]))
-                    position.write("\n")
                 xt,yt = pt[0]*scale*res,pt[1]*scale*res
                 x, y = pt1[0]*scale*res,pt1[1]*scale*res
                 pygame.draw.line(gameDisplay,yellow,(xt,yt),(x,y),3)
                 pygame.draw.circle(gameDisplay,red,(int(x),int(y)),4)
                 pygame.display.update()
-            position.close()
             pygame.time.delay(4000)
             draw = False
 
     else:
+        print('Path not possible')
         basicfont = pygame.font.SysFont(None, 48)
         text = basicfont.render('Path can\'t be generated', True, (255, 0, 0), (255, 255, 255))
         textrect = text.get_rect()
