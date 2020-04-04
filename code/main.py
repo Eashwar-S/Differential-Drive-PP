@@ -41,6 +41,19 @@ def setPrecisionParameters(UL, UR):
 def writeSolutionToFile(solution):
     # Writing all explored nodes in text file.
     sol = np.array(solution)
+
+    #converting from image coordinates to gazebo coordinates
+    sol[:,0] = -5 + sol[:,0]
+    sol[:,1] = 5 - sol[:,1]
+    sol[:,2] = 360 - sol[:,2]
+
+    #may need to modify velocities
+    # sol[:,3] = -5 + sol[:,3] 
+    # sol[:,4] = 5 - sol[:,4]
+    
+    #Solution is stored as goal to start so we reverse it
+    for i in range(6):
+        sol[:,i] = sol[:,i][::-1]
     np.savetxt('/home/ak/Differential-Drive-PP/code/solution.txt',sol, delimiter=',')
 
 
@@ -72,9 +85,9 @@ def writeSolutionToFile(solution):
 # print('Enter right wheel rotational velocity')
 # ur = float(ijput())
 
-startOrientation = 360 - 15
-ul = 1
-ur = 1
+startOrientation = 360 - 0 
+ul = 2
+ur = 2
 s1 = 5+(2)
 s2 = 5-(1)
 g1 = 5+(2)
@@ -86,6 +99,7 @@ g2 = 5-(-1)
 threshDistance = 0.1
 clearance = 0.2
 threshAngle, dt = setPrecisionParameters(ul, ur)
+
 #---------------------------
 #  Robot parameters
 #---------------------------

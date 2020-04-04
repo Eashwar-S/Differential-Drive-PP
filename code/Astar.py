@@ -207,10 +207,6 @@ def constraints(X0, Y0,Theta0,UL,UR,robotParams,dt):
     # print(y_dot)
     return Xn, Yn, Thetan, x_dot, y_dot, omega
 
-
-
-
-
 if __name__ == "__main__":
     pass
     # startOrientation = 360 - 15
