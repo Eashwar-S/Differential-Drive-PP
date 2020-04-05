@@ -48,8 +48,9 @@ def writeSolutionToFile(solution):
     sol[:,2] = 360 - sol[:,2]
 
     #may need to modify velocities
-    # sol[:,3] = -5 + sol[:,3] 
+    # sol::,3] = -5 + sol[:,3] 
     # sol[:,4] = 5 - sol[:,4]
+    sol[:,5] = -1*sol[:,5]
     
     #Solution is stored as goal to start so we reverse it
     for i in range(6):

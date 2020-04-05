@@ -194,7 +194,8 @@ def constraints(X0, Y0,Theta0,UL,UR,robotParams,dt):
     x_dot = r/2 * (UL + UR) * math.cos(math.radians(Theta0)) 
     y_dot = r/2 * (UL + UR) * math.sin(math.radians(Theta0)) 
     omega = (r / L) * (UR - UL) 
-
+    
+    print(x_dot) 
     dx = x_dot*dt  
     dy = y_dot*dt 
     dtheta = omega*dt
@@ -202,6 +203,7 @@ def constraints(X0, Y0,Theta0,UL,UR,robotParams,dt):
     Xn = X0 + dx
     Yn = Y0 + dy
     Thetan = (Theta0 +  dtheta)%360
+
     
     # print(x_dot)
     # print(y_dot)
