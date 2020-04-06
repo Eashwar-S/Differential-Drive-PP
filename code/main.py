@@ -55,7 +55,7 @@ def writeSolutionToFile(solution):
     #Solution is stored as goal to start so we reverse it
     for i in range(6):
         sol[:,i] = -1*sol[:,i][::-1]
-    np.savetxt('/home/ak/Differential-Drive-PP/code/solution.txt',sol, delimiter=',')
+    np.savetxt('/home/eashwar/Desktop/Differential-Drive-PP/code/solution.txt',sol, delimiter=',')
 
 
 ###################################################
@@ -158,7 +158,7 @@ pygame.draw.circle(gameDisplay, red, (circlePts1[0]*scale,circlePts1[1]*scale), 
 pygame.draw.circle(gameDisplay, red, (circlePts2[0]*scale,circlePts2[1]*scale), circlePts2[2]*scale)
 pygame.draw.circle(gameDisplay, red, (circlePts3[0]*scale,circlePts3[1]*scale), circlePts3[2]*scale)
 pygame.draw.circle(gameDisplay, red, (circlePts4[0]*scale,circlePts4[1]*scale), circlePts4[2]*scale)
-pygame.draw.rect(gameDisplay,red,[scale*2.25,scale*1.25,scale*1.5,scale*0.5])
+pygame.draw.rect(gameDisplay,red,[scale*2.25,scale*1.25,scale*1.5,scale*1.5])
 pygame.draw.rect(gameDisplay,red,[scale*0.2,scale*4.2,scale*1.6,scale*1.6])
 pygame.draw.rect(gameDisplay,red,[scale*8.2,scale*4.2,scale*1.6,scale*1.6])
 

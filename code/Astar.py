@@ -37,7 +37,7 @@ def isValidWorkspace(pt, r, radiusClearance):
     #                             Rectangle pts
     # --------------------------------------------------------------------------------
     X = np.float32([2.25, 3.75, 3.75, 2.25]) / r
-    Y = np.float32([1.25, 1.25, 1.75, 1.75]) / r
+    Y = np.float32([1.25, 1.25, 2.75, 2.75]) / r
     ptInRectangle = y >= Y[0] - radiusClearance / r                        and \
                     0 >= (Y[2] - Y[1]) * (x - X[1]) - radiusClearance / r  and \
                     y <= Y[2]+ radiusClearance / r                         and \
