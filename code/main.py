@@ -98,7 +98,7 @@ g2 = 5-(-4)
 #  Precision Parameters
 #---------------------------
 threshDistance = 0.1
-clearance = 0.2
+clearance = 0.5
 threshAngle, dt = setPrecisionParameters(ul, ur)
 dt = 0.3
 threshAngle = 5
