@@ -55,7 +55,7 @@ def writeSolutionToFile(solution):
     #Solution is stored as goal to start so we reverse it
     for i in range(6):
         sol[:,i] = -1*sol[:,i][::-1]
-    np.savetxt('/home/eashwar/Desktop/Differential-Drive-PP/code/solution.txt',sol, delimiter=',')
+    np.savetxt('/home/ak/Differential-Drive-PP/code/solution.txt',sol, delimiter=',')
 
 
 ###################################################
@@ -89,10 +89,10 @@ def writeSolutionToFile(solution):
 startOrientation = 360 - 0 
 ul = 20
 ur = 20
-s1 = 5+(2)
-s2 = 5-(1)
-g1 = 5+(-4)
-g2 = 5-(-4)
+s1 = 5+(-4)
+s2 = 5-(-3)
+g1 = 5+(0)
+g2 = 5-(-3)
 
 #---------------------------
 #  Precision Parameters
