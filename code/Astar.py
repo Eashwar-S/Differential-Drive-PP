@@ -190,24 +190,22 @@ def generatePath(q, startEndCoor, nodesExplored,robotParams,dt,radiusClearance,t
 def constraints(X0, Y0,Theta0,UL,UR,robotParams,dt):
     r = robotParams[2]        # Radius of the wheel  
     L = robotParams[3]        # Distance between the wheels  
-
+    
     x_dot = r/2 * (UL + UR) * math.cos(math.radians(Theta0)) 
     y_dot = r/2 * (UL + UR) * math.sin(math.radians(Theta0)) 
-    omega = (r / L) * (UR - UL) 
-    
-    print(x_dot) 
+    omega = 0.5*(r / L) * (UR - UL)  # 0.5 is the smoothing coefficient
+                                     # Want to limit sharp turns
+                                     # smaller value results in smaller angle changes
     dx = x_dot*dt  
     dy = y_dot*dt 
     dtheta = omega*dt
 
     Xn = X0 + dx
     Yn = Y0 + dy
-    Thetan = (Theta0 +  dtheta)%360
+    Thetan = (Theta0 +  math.degrees(dtheta))%360
 
-    
-    # print(x_dot)
-    # print(y_dot)
     return Xn, Yn, Thetan, x_dot, y_dot, omega
+
 
 if __name__ == "__main__":
     pass

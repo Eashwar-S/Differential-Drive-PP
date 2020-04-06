@@ -50,11 +50,11 @@ def writeSolutionToFile(solution):
     #may need to modify velocities
     # sol::,3] = -5 + sol[:,3] 
     # sol[:,4] = 5 - sol[:,4]
-    sol[:,5] = -1*sol[:,5]
+    sol[:,5] = sol[:,5]
     
     #Solution is stored as goal to start so we reverse it
     for i in range(6):
-        sol[:,i] = sol[:,i][::-1]
+        sol[:,i] = -1*sol[:,i][::-1]
     np.savetxt('/home/ak/Differential-Drive-PP/code/solution.txt',sol, delimiter=',')
 
 
@@ -87,12 +87,12 @@ def writeSolutionToFile(solution):
 # ur = float(ijput())
 
 startOrientation = 360 - 0 
-ul = 2
-ur = 2
+ul = 20
+ur = 20
 s1 = 5+(2)
 s2 = 5-(1)
-g1 = 5+(2)
-g2 = 5-(-1)
+g1 = 5+(-4)
+g2 = 5-(-4)
 
 #---------------------------
 #  Precision Parameters
@@ -100,11 +100,15 @@ g2 = 5-(-1)
 threshDistance = 0.1
 clearance = 0.2
 threshAngle, dt = setPrecisionParameters(ul, ur)
+dt = 0.3
+threshAngle = 5
+
 
 #---------------------------
 #  Robot parameters
 #---------------------------
-wheelDist = 0.03175
+wheelDist = 0.2116 # 0.3175/6 * 4
+# wheelDist = 0.3175
 wheelRadius = 0.038
 robotParams = [ul,ur,wheelRadius,wheelDist]
 robotRadius = 0.177
