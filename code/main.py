@@ -174,17 +174,14 @@ circlePts2 = [7,8,1]
 circlePts3 = [5,5,1]
 circlePts4 = [3,8,1]
 
-polygonPts1 =  np.float32([[2.25,1.25],[3.75,1.25],[2.25,1.75],[3.75,1.75]])
-polygonPts2 =  np.float32([[0.2,4.2],[1.8,4.2],[0.2,5.8],[1.8,5.8]])
-polygonPts3 =  np.float32([[8.2,4.2],[9.8,4.2],[8.2,5.8],[9.8,5.8]])
 
 pygame.draw.circle(gameDisplay, red, (circlePts1[0]*scale,circlePts1[1]*scale), circlePts1[2]*scale)
 pygame.draw.circle(gameDisplay, red, (circlePts2[0]*scale,circlePts2[1]*scale), circlePts2[2]*scale)
 pygame.draw.circle(gameDisplay, red, (circlePts3[0]*scale,circlePts3[1]*scale), circlePts3[2]*scale)
 pygame.draw.circle(gameDisplay, red, (circlePts4[0]*scale,circlePts4[1]*scale), circlePts4[2]*scale)
 pygame.draw.rect(gameDisplay,red,[scale*2.25,scale*1.25,scale*1.5,scale*1.5])
-pygame.draw.rect(gameDisplay,red,[scale*0.2,scale*4.2,scale*1.6,scale*1.6])
-pygame.draw.rect(gameDisplay,red,[scale*8.2,scale*4.2,scale*1.6,scale*1.6])
+pygame.draw.rect(gameDisplay,red,[scale*0.25,scale*4.25,scale*1.5,scale*1.5])
+pygame.draw.rect(gameDisplay,red,[scale*8.25,scale*4.25,scale*1.5,scale*1.5])
 
 
 ############################################################

@@ -34,7 +34,7 @@ def isValidWorkspace(pt, r, radiusClearance):
 
 
     # --------------------------------------------------------------------------------
-    #                             Rectangle pts
+    #                             square 1 pts
     # --------------------------------------------------------------------------------
     X = np.float32([2.25, 3.75, 3.75, 2.25]) / r
     Y = np.float32([1.25, 1.25, 2.75, 2.75]) / r
@@ -44,10 +44,10 @@ def isValidWorkspace(pt, r, radiusClearance):
                     0 >= (Y[0] - Y[3]) * (x - X[3]) - radiusClearance / r 
 
     # --------------------------------------------------------------------------------
-    #                             Square 1 pts
+    #                             Square 2 pts
     # --------------------------------------------------------------------------------
-    X = np.float32([0.2, 1.8, 1.8, 0.2])/r
-    Y = np.float32([4.2, 4.2, 5.8, 5.8])/r
+    X = np.float32([0.25, 1.75, 1.75, 0.25])/r
+    Y = np.float32([4.25, 4.25, 5.75, 5.75])/r
     ptInSquare1 = y  >= Y[0] - radiusClearance / r                        and \
                   0  >= (Y[2] - Y[1]) * (x - X[1]) - radiusClearance / r  and \
                   y  <= Y[2]+ radiusClearance / r                         and \
@@ -55,10 +55,10 @@ def isValidWorkspace(pt, r, radiusClearance):
 
 
     # --------------------------------------------------------------------------------
-    #                             Square 2 pts
+    #                             Square 3 pts
     # --------------------------------------------------------------------------------
-    X = np.float32([8.2, 9.8, 9.8, 8.2])/r
-    Y = np.float32([4.2, 4.2, 5.8, 5.8])/r
+    X = np.float32([8.25, 9.75, 9.75, 8.25])/r
+    Y = np.float32([4.25, 4.25, 5.75, 5.75])/r
     ptInSquare2 = y  >= Y[0] - radiusClearance / r                        and \
                   0  >= (Y[2] - Y[1]) * (x - X[1]) - radiusClearance / r  and \
                   y  <= Y[2]+ radiusClearance / r                         and \
