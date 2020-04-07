@@ -42,21 +42,25 @@ def writeSolutionToFile(solution):
     # Writing all explored nodes in text file.
     sol = np.array(solution)
 
-    #converting from image coordinates to gazebo coordinates
+    #converting from image coordinates to world cooridnates
     sol[:,0] = -5 + sol[:,0]
     sol[:,1] = 5 - sol[:,1]
     sol[:,2] = 360 - sol[:,2]
-
-    #may need to modify velocities
-    # sol::,3] = -5 + sol[:,3] 
-    # sol[:,4] = 5 - sol[:,4]
-    sol[:,5] = sol[:,5]
     
     #Solution is stored as goal to start so we reverse it
     for i in range(6):
         sol[:,i] = -1*sol[:,i][::-1]
-    np.savetxt('/home/ak/Differential-Drive-PP/code/solution.txt',sol, delimiter=',')
+    np.savetxt('solution.txt',sol, delimiter=',')
 
+
+def writeParametersForGazebo(dt,is1,is2,iorientation):
+    #input from world coordinates to gazebo coordinates 
+    s1 = -1*is1
+    s2 = -1*is2
+    orientation = math.radians(iorientation) + math.pi #gazebo works in radians
+
+    params = np.array([dt,s1,s2,orientation]) 
+    np.savetxt('gazebo_params.txt',params,delimiter=',')
 
 ###################################################
 #                  Parameters 
@@ -86,13 +90,25 @@ def writeSolutionToFile(solution):
 # print('Enter right wheel rotational velocity')
 # ur = float(ijput())
 
-startOrientation = 360 - 0 
-ul = 20
-ur = 20
-s1 = 5+(-4)
-s2 = 5-(-3)
-g1 = 5+(0)
-g2 = 5-(-3)
+iul = 20
+iur = 20
+is1 = -4
+is2 = 4
+ig1 = 0
+ig2 = -3
+istartOrientation = 0
+
+#---------------------------------
+# Inputs From World Coordinates 
+# To Pygame Coordinates
+#---------------------------------
+startOrientation = 360 - istartOrientation
+ul = iul
+ur = iur
+s1 = 5+(is1)
+s2 = 5-(is2)
+g1 = 5+(ig1)
+g2 = 5-(ig2)
 
 #---------------------------
 #  Precision Parameters
@@ -103,15 +119,24 @@ threshAngle, dt = setPrecisionParameters(ul, ur)
 dt = 0.3
 threshAngle = 5
 
-
 #---------------------------
 #  Robot parameters
 #---------------------------
 wheelDist = 0.2116 # 0.3175/6 * 4
-# wheelDist = 0.3175
 wheelRadius = 0.038
 robotParams = [ul,ur,wheelRadius,wheelDist]
 robotRadius = 0.177
+
+#-------------------------------
+#  Parameters needed by gazebo
+#-------------------------------
+#dt - affects publishing rate
+#   - dt must be of resolution 0.1 
+#   - restricting frequency to 10Hz in gazebo
+#   - 1/frequency*dt must be a whole number 
+
+#is1,is2,iorientation- initial pose for robot
+writeParametersForGazebo(dt,is1,is2,istartOrientation)
 
 #----------------------------
 #  Display parameters
@@ -120,7 +145,6 @@ pygame.init()
 
 res = 1.0  #resolution of grid 
 scale = 80 #scale of grid
-
 
 white = (255,255,255)
 black = (0,0,0)
