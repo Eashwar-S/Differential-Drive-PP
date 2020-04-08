@@ -40,9 +40,20 @@ Enter goal location g2 between -5 and 5 - (Y-coordinate of goal node)
 ```
 
 ### Things to note about Input Instruction
-![vel equations](images/vel.png)
+From the velocity equation,
 
+![vel equation](images/vel.png)
 
+if the angular velocities of the wheels(U) are really small, then the robot will have a really small velocity.
+For U = 10, v becomes roughly 0.3. However this is further reduced as v is multiplied by cos and sin of angles. Therefore,
+v becomes roughly 0.1. 
+
+In general,  
+U = 10 -> v = 0.1  
+U = 20 -> v = 0.3
+
+For values of U below 10, the turtlebot may be even slower than a tortoise. It is advisable to enter values in the range
+(10,20)
 
 
 ### Sample output for rigid robot:
