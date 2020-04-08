@@ -3,7 +3,7 @@
 ### Description
 In this project, A* algorithm is implemented considering the differential contraints of the turtle bot. We are considering the rigid robot to be the turtlebot. The action set of the rigid robot is determined using the left and right wheel velocities which are provided as inputs by the user. In addition to that, constaints are added to the action set by determining the equations of the motion of the turtlebot.
 ### Obstacle space
-![Obstacle space](images/real_obs.JPG)
+![Obstacle space](images/pic2.PNG)
 ### Actions
 The actions of the robot are determined by left and right wheel velocities given by the user.
 
