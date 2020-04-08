@@ -93,7 +93,7 @@ g2 = 5-(ig2)
 #---------------------------
 threshDistance = 0.1
 clearance = 0.5
-threshAngle, dt = setPrecisionParameters(ul, ur)
+# threshAngle, dt = setPrecisionParameters(ul, ur)
 dt = 0.3
 threshAngle = 5
 
