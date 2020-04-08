@@ -16,28 +16,6 @@ def triangleCoordinates(start, end, triangleSize = 5):
 
     return coordinateList
 
-def setPrecisionParameters(UL, UR):
-    threshAngle = 0
-    dt = 0
-    if max(UL,UR) <= 1:
-        threshAngle = 5
-        dt = 10
-    elif (max(UL,UR) > 1 and max(UL,UR) <= 5):
-        if UL == UR == 4:
-            threshAngle = 15
-            dt = 4
-        elif UL == UR == 5:
-            threshAngle = 15
-            dt = 3
-        else:
-            threshAngle = 15
-            dt = 5
-    else:
-        threshAngle = 15
-        dt = 2.5
-    return threshAngle,dt
-
-
 def writeSolutionToFile(solution):
     # Writing all explored nodes in text file.
     sol = np.array(solution)

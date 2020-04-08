@@ -26,8 +26,8 @@ For U = 10, v becomes roughly 0.19m/s. However this is further reduced as v is m
 v becomes roughly 0.1m/s. 
 
 In general,  
-U=max(Ul,Ur) = 10 -> max(v) = 0.1m/s -> NB These are rough estimates and not exact   
-U=max(Ul,Ur) = 20 -> max(v) = 0.3m/s
+U=max(Ul,Ur) = 10 implies max(v) = 0.1m/s -> NB These are rough estimates and not exact   
+U=max(Ul,Ur) = 20 implies max(v) = 0.3m/s
 
 The turtlebot can have a maximum value of 0.65m/s. This translates to a U value of roughly 34. 
 For values of U below 10, the turtlebot may be even slower than a tortoise. **It is advisable to enter values in the range
