@@ -77,13 +77,59 @@ Enter right wheel rotational velocity between 4.4 and 34
 ### SAMPLE OUTPUT FOR RIGID ROBOT
 After running the python file
 ```
-Cost took to reach the goal is: 395.64675298172733
-Backtracking...
-Total time taken 128.9800910949707
+Exploring nodes...
+Optimal path found
+Total time taken for exploring nodes 4.744330644607544 seconds.
 ```
 
-### Video
+### Video output
+For the inputs:
+```
+Robot considered is Turtlebot 2:
+Enter cleareance
+0.5
+Enter start location s1 between -5 and 5 - (X-coordinate of start node)
+-4
+Enter start location s2 between -5 and 5 - (Y-coordinate of start node)
+-3
+Enter the angle of the robot in degrees - (intial orientation of the robot)
+0
+Enter goal location g1 between -5 and 5 - (X-coordinate of goal node)
+0
+Enter goal location g2 between -5 and 5 - (Y-coordinate of goal node)
+-3
+Enter left wheel rotational velocity between 4.4 and 34
+20
+Enter right wheel rotational velocity between 4.4 and 34
+20
+```
+Following is the output
 
+![Alt Text](https://media.giphy.com/media/jVBeFvabOsKuRuAoo3/giphy.gif)
+
+For the inputs:
+```
+Robot considered is Turtlebot 2:
+Enter cleareance
+0.5
+Enter start location s1 between -5 and 5 - (X-coordinate of start node)
+-4
+Enter start location s2 between -5 and 5 - (Y-coordinate of start node)
+-4
+Enter the angle of the robot in degrees - (intial orientation of the robot)
+0
+4nter goal location g1 between -5 and 5 - (X-coordinate of goal node)
+0
+Enter goal location g2 between -5 and 5 - (Y-coordinate of goal node)
+2.5
+Enter left wheel rotational velocity between 4.4 and 34
+20
+Enter right wheel rotational velocity between 4.4 and 34
+20
+```
+Following is the output
+
+![Alt Text](https://media.giphy.com/media/dzPjNu7rUM6TUqEVcK/giphy.gif)
 # Phase-4:
 In phase 4, we implement A* algorithm on turtlebot by simulating it on gazebo using ROS.
 
@@ -126,3 +172,9 @@ rosrun turtlebot_astar talker.py
 **run the code in the Differential-Drive-PP directory**.The code will not work as we are using relative path to files
 to read necessary parameters.
 
+### Video output:
+First video output:
+
+![Alt Text](https://media.giphy.com/media/RetqYlXdgvC9jp7bNi/giphy.gif)
+
+To access full video please click on this [link](https://drive.google.com/drive/folders/1r2lyCS7f3MUi0458xqHsil_6RG9Ynp4d?usp=sharing)
