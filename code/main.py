@@ -63,9 +63,9 @@ def writeParametersForGazebo(dt,is1,is2,iorientation):
 # print('Enter goal location g2 between -5 and 5')
 # g2 = 5 - float(input())
 
-# print('Enter left wheel rotational velocity')
+# print('Enter left wheel rotational velocity between 4.4 and 34')
 # ul = float(input())
-# print('Enter right wheel rotational velocity')
+# print('Enter right wheel rotational velocity between 4.4 and 34')
 # ur = float(ijput())
 
 iul = 20

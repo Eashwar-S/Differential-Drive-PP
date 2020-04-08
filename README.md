@@ -33,6 +33,9 @@ The turtlebot can have a maximum value of 0.65m/s. This translates to a U value 
 For values of U below 10, the turtlebot may be even slower than a tortoise. **It is advisable to enter values in the range
 such that U=max(Ul,Ur) is in the range (10,34).**
 
+**The maximum possible values for both Ul and Ur is [4.4, 34].** By entering values below 4.4, the code will output 'Path can't be generated'. This happens because the code constantly checks for the distance beween the current and the next point to be greater than 0.1. If this condition is not satisfied, the next point is disregarded. When the user enter velocities below 4.4, the distance between the current and the next point will always be less than 0.1. Hence, all the points are disregarded. 
+
+
 #### START AND GOAL COORDINATES
 The start and goal coordinates must be with respect to the coordinate system as stated above. Do not use gazebo or image coordinates.
 
@@ -65,6 +68,10 @@ Enter goal location g1 between -5 and 5 - (X-coordinate of goal node)
 0
 Enter goal location g2 between -5 and 5 - (Y-coordinate of goal node)
 -3
+Enter left wheel rotational velocity between 4.4 and 34
+20
+Enter right wheel rotational velocity between 4.4 and 34
+20
 ```
 
 ### SAMPLE OUTPUT FOR RIGID ROBOT
