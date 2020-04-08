@@ -2,21 +2,16 @@
 ## A*-algorithm implementation with Differential constainsts of the turtlebot
 ### Description
 In this project, A* algorithm is implemented considering the differential contraints of the turtle bot. We are considering the rigid robot to be the turtlebot. The action set of the rigid robot is determined using the left and right wheel velocities which are provided as inputs by the user. In addition to that, constaints are added to the action set by determining the equations of the motion of the turtlebot.
+
 ### Obstacle space
 ![Obstacle space](images/pic2.PNG)
 ### Actions
-The actions of the robot are determined by left and right wheel velocities given by the user.
+The actions of the robot are determined by left and right wheel angular velocities(ul,ur) given by the user.
 
-### Dependencies 
+### Dependencies and libraries
 1. python -version 3
 2. pygame
-
-
-### Libraries used
-1. Numpy
-2. collections 
-3. queue
-4. math
+3. Numpy
 
 ### Run Code
 Enter the following to run the code.
@@ -43,6 +38,12 @@ Enter goal location g1 between -5 and 5 - (X-coordinate of goal node)
 Enter goal location g2 between -5 and 5 - (Y-coordinate of goal node)
 -3
 ```
+
+### Things to note about Input Instruction
+![vel equation](https://latex.codecogs.com/gif.latex?v%3D%5Cfrac%7B%28U_%7Bl%7D&plus;U_%7Br%7D%29r%7D%7B2%7D%20%5Cquad%20where%20%5Cquad%20r%3D0.038)
+
+
+
 
 ### Sample output for rigid robot:
 After running the python file
