@@ -40,7 +40,7 @@ Enter goal location g2 between -5 and 5 - (Y-coordinate of goal node)
 ```
 
 ### Things to note about Input Instruction
-![vel equation](https://latex.codecogs.com/gif.latex?v%3D%5Cfrac%7B%28U_%7Bl%7D&plus;U_%7Br%7D%29r%7D%7B2%7D%20%5Cquad%20where%20%5Cquad%20r%3D0.038)
+![vel equations](images/vel.png)
 
 
 
