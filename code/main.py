@@ -68,6 +68,12 @@ iul = float(input())
 print('Enter right wheel rotational velocity')
 iur = float(input())
 
+print('Enter smooth Coef or negative value for default paramater')
+ismoothCoef = float(input())
+
+print('Enter Time step or negative value for default paramater')
+idt = float(input())
+
 # iul = 20
 # iur = 20
 # is1 = -4#-4  #-4   
@@ -87,22 +93,20 @@ s1 = 5+(is1)
 s2 = 5-(is2)
 g1 = 5+(ig1)
 g2 = 5-(ig2)
+dt = idt if(idt>=0) else  0.3
+smoothCoef = ismoothCoef if (ismoothCoef>= 0) else 0.5
 
 #---------------------------
 #  Precision Parameters
 #---------------------------
 threshDistance = 0.1
 clearance = 0.3
-
-
-# threshAngle, dt = setPrecisionParameters(ul, ur)
-dt = 0.8
 threshAngle = 5
 
 #---------------------------
 #  Robot parameters
 #---------------------------
-smoothCoef = 0.1
+# smoothCoef = ismoothCoef if (ismoothCoef>= 0) else 0.5
 wheelDist = 0.2116 # 0.3175/6 * 4
 wheelRadius = 0.038
 robotParams = [ul,ur,wheelRadius,wheelDist, smoothCoef]
