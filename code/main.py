@@ -46,35 +46,35 @@ def writeParametersForGazebo(dt,is1,is2,iorientation):
 #------------------------------
 #  Getting user Inputs
 #------------------------------
-# clearance = 0
-# print('Robot considered is Turtlebot 2:')
-# print("Enter cleareance")
-# clearance = float(input())
+clearance = 0
+print('Robot considered is Turtlebot 2:')
+print("Enter cleareance")
+clearance = float(input())
 
-# print('Enter start location s1 between -5 and 5')
-# s1 = 5 + float(input())
-# print('Enter start location s2 between -5 and 5')
-# s2 = 5 - float(input())
-# print('Enter the angle of the robot in degrees')
-# startOrientation = 360 - float(input())
+print('Enter start location s1 between -5 and 5')
+is1 = float(input())
+print('Enter start location s2 between -5 and 5')
+is2 = float(input())
+print('Enter the angle of the robot in degrees')
+istartOrientation = float(input())
 
-# print('Enter goal location g1 between -5 and 5')
-# g1 = 5 + float(input())
-# print('Enter goal location g2 between -5 and 5')
-# g2 = 5 - float(input())
+print('Enter goal location g1 between -5 and 5')
+ig1 = float(input())
+print('Enter goal location g2 between -5 and 5')
+ig2 = float(input())
 
-# print('Enter left wheel rotational velocity between 4.4 and 34')
-# ul = float(input())
-# print('Enter right wheel rotational velocity between 4.4 and 34')
-# ur = float(ijput())
+print('Enter left wheel rotational velocity')
+iul = float(input())
+print('Enter right wheel rotational velocity')
+iur = float(input())
 
-iul = 20
-iur = 20
-is1 = -4
-is2 = 4
-ig1 = 0
-ig2 = -3
-istartOrientation = 0
+# iul = 20
+# iur = 20
+# is1 = -4#-4  #-4   
+# is2 = -4#-4  #-3     
+# ig1 = 4#4   #0       
+# ig2 = 2.5#2.5  #-3    
+# istartOrientation = 0
 
 #---------------------------------
 # Inputs From World Coordinates 
@@ -92,17 +92,20 @@ g2 = 5-(ig2)
 #  Precision Parameters
 #---------------------------
 threshDistance = 0.1
-clearance = 0.5
+clearance = 0.3
+
+
 # threshAngle, dt = setPrecisionParameters(ul, ur)
-dt = 0.3
+dt = 0.8
 threshAngle = 5
 
 #---------------------------
 #  Robot parameters
 #---------------------------
+smoothCoef = 0.1
 wheelDist = 0.2116 # 0.3175/6 * 4
 wheelRadius = 0.038
-robotParams = [ul,ur,wheelRadius,wheelDist]
+robotParams = [ul,ur,wheelRadius,wheelDist, smoothCoef]
 robotRadius = 0.177
 
 #-------------------------------
