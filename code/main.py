@@ -70,10 +70,10 @@ def writeParametersForGazebo(dt,is1,is2,iorientation):
 
 iul = 20
 iur = 20
-is1 = -4  #-4 
-is2 = -4  #-3 
-ig1 = 4   #0  
-ig2 = 2.5 #-3 
+is1 = -4  #-4   
+is2 = -4  #-3   
+ig1 = 4   #0    
+ig2 = 2.5 #-3   
 istartOrientation = 0
 
 #---------------------------------
@@ -92,9 +92,9 @@ g2 = 5-(ig2)
 #  Precision Parameters
 #---------------------------
 threshDistance = 0.1
-clearance = 0.5
+clearance = 0.3
 # threshAngle, dt = setPrecisionParameters(ul, ur)
-dt = 0.3
+dt = 0.8
 threshAngle = 5
 
 #---------------------------
