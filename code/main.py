@@ -71,9 +71,9 @@ def writeParametersForGazebo(dt,is1,is2,iorientation):
 iul = 20
 iur = 20
 is1 = -4  #-4   
-is2 = -4  #-3   
-ig1 = 4   #0    
-ig2 = 2.5 #-3   
+is2 = -4  #-3     
+ig1 = 4   #0       
+ig2 = 2.5  #-3    
 istartOrientation = 0
 
 #---------------------------------
@@ -93,6 +93,8 @@ g2 = 5-(ig2)
 #---------------------------
 threshDistance = 0.1
 clearance = 0.3
+
+
 # threshAngle, dt = setPrecisionParameters(ul, ur)
 dt = 0.8
 threshAngle = 5
@@ -100,9 +102,10 @@ threshAngle = 5
 #---------------------------
 #  Robot parameters
 #---------------------------
+smoothCoef = 0.1
 wheelDist = 0.2116 # 0.3175/6 * 4
 wheelRadius = 0.038
-robotParams = [ul,ur,wheelRadius,wheelDist]
+robotParams = [ul,ur,wheelRadius,wheelDist, smoothCoef]
 robotRadius = 0.177
 
 #-------------------------------
