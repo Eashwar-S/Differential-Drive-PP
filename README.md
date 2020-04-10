@@ -35,7 +35,7 @@ such that U=max(Ul,Ur) is in the range (10,34).**
 
 **The maximum possible values for both Ul and Ur is [4.4, 34].** By entering values below 4.4, the code will output 'Path can't be generated'. This happens because the code constantly checks for the distance beween the current and the next point to be greater than 0.1. If this condition is not satisfied, the next point is disregarded. When the user enter velocities below 4.4, the distance between the current and the next point will always be less than 0.1. Hence, all the points are disregarded. 
 
-#### Hiddden Parameters: 
+#### Hidden Parameters: 
 There hidden parameters considered in this code are:
 
 1. Time step dt
