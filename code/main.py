@@ -33,9 +33,11 @@ def writeSolutionToFile(solution):
 
 def writeParametersForGazebo(dt,is1,is2,iorientation):
     #input from world coordinates to gazebo coordinates 
-    s1 = -1*is1
-    s2 = -1*is2
-    orientation = math.radians(iorientation) + math.pi #gazebo works in radians
+    # s1 = -is1
+    # s2 = -is2
+    s1 = is1
+    s2 = is2
+    orientation = math.radians(iorientation)# + math.pi #gazebo works in radians
 
     params = np.array([dt,s1,s2,orientation]) 
     np.savetxt('gazebo_params.txt',params,delimiter=',')
@@ -46,41 +48,43 @@ def writeParametersForGazebo(dt,is1,is2,iorientation):
 #------------------------------
 #  Getting user Inputs
 #------------------------------
-clearance = 0
-print('Robot considered is Turtlebot 2:')
-print("Enter cleareance")
-clearance = float(input())
+clearance = 0.5
+# print('Robot considered is Turtlebot 2:')
+# print("Enter cleareance")
+# clearance = float(input())
 
-print('Enter start location s1 between -5 and 5')
-is1 = float(input())
-print('Enter start location s2 between -5 and 5')
-is2 = float(input())
-print('Enter the angle of the robot in degrees')
-istartOrientation = float(input())
+# print('Enter start location s1 between -5 and 5')
+# is1 = float(input())
+# print('Enter start location s2 between -5 and 5')
+# is2 = float(input())
+# print('Enter the angle of the robot in degrees')
+# istartOrientation = float(input())
 
-print('Enter goal location g1 between -5 and 5')
-ig1 = float(input())
-print('Enter goal location g2 between -5 and 5')
-ig2 = float(input())
+# print('Enter goal location g1 between -5 and 5')
+# ig1 = float(input())
+# print('Enter goal location g2 between -5 and 5')
+# ig2 = float(input())
 
-print('Enter left wheel rotational velocity')
-iul = float(input())
-print('Enter right wheel rotational velocity')
-iur = float(input())
+# print('Enter left wheel rotational velocity')
+# iul = float(input())
+# print('Enter right wheel rotational velocity')
+# iur = float(input())
 
-print('Enter smooth Coef or negative value for default paramater')
-ismoothCoef = float(input())
+# print('Enter smooth Coef or negative value for default paramater')
+# ismoothCoef = float(input())
 
-print('Enter Time step or negative value for default paramater')
-idt = float(input())
+# print('Enter Time step or negative value for default paramater')
+# idt = float(input())
 
-# iul = 20
-# iur = 20
-# is1 = -4#-4  #-4   
-# is2 = -4#-4  #-3     
-# ig1 = 4#4   #0       
-# ig2 = 2.5#2.5  #-3    
-# istartOrientation = 0
+iul = 20
+iur = 20
+is1 = -4#-4  #-4   
+is2 = -3#-4  #-3     
+ig1 = 0#4   #0       
+ig2 = -3#2.5  #-3    
+istartOrientation = 0
+idt = 0.3
+ismoothCoef = 0.4
 
 #---------------------------------
 # Inputs From World Coordinates 
@@ -93,7 +97,7 @@ s1 = 5+(is1)
 s2 = 5-(is2)
 g1 = 5+(ig1)
 g2 = 5-(ig2)
-dt = idt if(idt>=0) else  0.3
+dt = idt if(idt>=0.0) else  0.3
 smoothCoef = ismoothCoef if (ismoothCoef>= 0) else 0.5
 
 #---------------------------

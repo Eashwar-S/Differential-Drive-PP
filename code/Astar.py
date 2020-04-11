@@ -194,9 +194,8 @@ def constraints(X0, Y0,Theta0,UL,UR,robotParams,dt):
     
     x_dot = r/2 * (UL + UR) * math.cos(math.radians(Theta0)) 
     y_dot = r/2 * (UL + UR) * math.sin(math.radians(Theta0)) 
-    omega = smoothCoef*(r / L) * (UR - UL)  # 0.5 is the smoothing coefficient
-                                     # Want to limit sharp turns
-                                     # smaller value results in smaller angle changes
+    omega = smoothCoef*(r / L) * (UR - UL)  # The smoothing coefficient limits sharp turns
+                                            # smaller value results in smaller angle changes
     dx = x_dot*dt  
     dy = y_dot*dt 
     dtheta = omega*dt
