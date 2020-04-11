@@ -48,7 +48,7 @@ def writeParametersForGazebo(dt,is1,is2,iorientation):
 #------------------------------
 #  Getting user Inputs
 #------------------------------
-clearance = 0.5
+# clearance = 0
 # print('Robot considered is Turtlebot 2:')
 # print("Enter cleareance")
 # clearance = float(input())
@@ -83,8 +83,8 @@ is2 = -3#-4  #-3
 ig1 = 0#4   #0       
 ig2 = -3#2.5  #-3    
 istartOrientation = 0
-idt = 0.3
-ismoothCoef = 0.4
+idt = -1#0.6 #0.8
+ismoothCoef = -1# 0.2 #0.1
 
 #---------------------------------
 # Inputs From World Coordinates 
