@@ -14,9 +14,9 @@ The actions of the robot are determined by left and right wheel angular velociti
 3. Numpy
 
 
-### INPUT PARAMETERS
+### Input Parameters
 
-#### UL and UR
+#### Ul and Ur
 From the velocity equation,
 
 ![vel equation](images/vel.png)
@@ -38,14 +38,26 @@ such that U=max(Ul,Ur) is in the range (10,34).**
 #### Precision Parameters: 
 The precision parameters considered in this code are:
 
-1. Time step dt - The time step affects the optimal path in the sense that 
-2. Smoothing coefficient 
+##### Time Step dt
+1. The time step affects the optimal path in the sense that it affects the distance between the two inputs, clearly from the 
+update equation,  
+![vel update](images/velupdate.png)
+
+Using a big value for dt, means that the newpoints,(xn,yn) are going to farther away from oldpoints(xo,yo) and **this in turn affects the optimal
+path as there could be suitable path generated for smaller dt** .   
+
+**By default, a dt value of 0.3 is used.** However, you can modify this can be modified
+
+##### 2. Smoothing coefficient  
+Similary, the smoothing coefficient,k determines the angle change between two points. From the update equation we 
+have,
+
+![omega update](images/thetaupdate.png)
+
+using small values of k means that the change in angle between successive points is reduced. This helps to remove sharp turns. The **default value** used is **0.5**, however this can be changed. **NB Just like the Time step,dt, changing the smoothing cooefficient affects the optimal path**
 
 
-These two parameters are dependent and inversly proportional to each other. With increasing time step, the distance between the current and the next point increases. As a result, sharp edges are form in the optimal path. So, when time step is increased, the smoothing coefficient is decreased which is multiplied with the angular velocity. So, the angular velocity is decreased which results in smooth edges.
-
-
-#### START AND GOAL COORDINATES
+#### Start and Goal Coordinates
 The start and goal coordinates must be with respect to the coordinate system as stated above. Do not use gazebo or image coordinates.
 
 
@@ -70,7 +82,7 @@ Enter cleareance
 Enter start location s1 between -5 and 5 - (X-coordinate of start node)
 -4
 Enter start location s2 between -5 and 5 - (Y-coordinate of start node)
-4
+-4
 Enter the angle of the robot in degrees - (intial orientation of the robot)
 0
 Enter goal location g1 between -5 and 5 - (X-coordinate of goal node)
@@ -81,62 +93,15 @@ Enter left wheel rotational velocity between 4.4 and 34
 20
 Enter right wheel rotational velocity between 4.4 and 34
 20
+Enter smooth Coef or negative value for default paramater
+-1
+Enter Time step or negative value for default paramater
+-1
+
 ```
 
-### SAMPLE OUTPUT FOR RIGID ROBOT
-After running the python file
-```
-Exploring nodes...
-Optimal path found
-Total time taken for exploring nodes 4.744330644607544 seconds.
-```
+### SAMPLE OUTPUT 
 
-### Video output
-For the inputs:
-```
-Robot considered is Turtlebot 2:
-Enter cleareance
-0.5
-Enter start location s1 between -5 and 5 - (X-coordinate of start node)
--4
-Enter start location s2 between -5 and 5 - (Y-coordinate of start node)
--3
-Enter the angle of the robot in degrees - (intial orientation of the robot)
-0
-Enter goal location g1 between -5 and 5 - (X-coordinate of goal node)
-0
-Enter goal location g2 between -5 and 5 - (Y-coordinate of goal node)
--3
-Enter left wheel rotational velocity between 4.4 and 34
-20
-Enter right wheel rotational velocity between 4.4 and 34
-20
-```
-Following is the output
-
-![Alt Text](https://media.giphy.com/media/jVBeFvabOsKuRuAoo3/giphy.gif)
-
-For the inputs:
-```
-Robot considered is Turtlebot 2:
-Enter cleareance
-0.5
-Enter start location s1 between -5 and 5 - (X-coordinate of start node)
--4
-Enter start location s2 between -5 and 5 - (Y-coordinate of start node)
--4
-Enter the angle of the robot in degrees - (intial orientation of the robot)
-0
-Enter goal location g1 between -5 and 5 - (X-coordinate of goal node)
-4
-Enter goal location g2 between -5 and 5 - (Y-coordinate of goal node)
-2.5
-Enter left wheel rotational velocity between 4.4 and 34
-20
-Enter right wheel rotational velocity between 4.4 and 34
-20
-```
-Following is the output
 
 ![Alt Text](https://media.giphy.com/media/dzPjNu7rUM6TUqEVcK/giphy.gif)
 # Phase-4:
