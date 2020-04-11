@@ -147,28 +147,29 @@ rosrun turtlebot_astar talker.py
 to read necessary parameters.
 
 ### Video output:
-First video Parameters:
+To test the results of pygame on turtlebot,**different smoothing coefficient and time step** was used as opposed to the default setup. 
+This was because  the points are close together for the default values. As a result, it was difficult for the turtlebot to 
+follow the desired path.
 
-Start coordinates: (-4,-3)   Start orientation: 0  Goal coordinates: (0,-3)
-
-clearance: 0.3   dt = 0.6    smoothing coefficient = 0.2
-
-Left wheel velocity : 20     Right wheel velocity : 20
-
-First video output:
+**First video Parameters:**
+<pre>
+<b>Start coordinates</b>: (-4,-3),<b>Start orientation</b>: 0, <b>Goal coordinates</b>: (0,-3), <b>clearance</b>: 0.3   
+<b>dt</b> = 0.6, <b>smoothing coefficient</b> = 0.2, <b>Left wheel velocity</b> : 20, <b>Right wheel velocity</b> : 20
+</pre>
+**First video output:**
 
 ![alt-text-1](gif/gazebo-resize.gif) 
 ![alt-text-2](gif/python1-resize.gif)
 
-Second video Parameters:
+**Second video Parameters:**
+Using different smoothing coefficient and time step dt, changes the optimal path as compared to the default case.
+<pre>
+<b>Start coordinates</b>: (-4,-4),<b>Start orientation</b>: 0, <b>Goal coordinates</b>: (4,2.5), <b>clearance</b>: 0.3   
+<b>dt</b> = 0.8, <b>smoothing coefficient</b> = 0.1, <b>Left wheel velocity</b> : 20, <b>Right wheel velocity</b> : 20
+</pre>
 
-Start coordinates: (-4,-4)  Start orientation: 0  Goal coordinates: (4,2.5)
 
-clearance: 0.3  dt = 0.8  smoothing coefficient = 0.1
-
-Left wheel velocity : 20   Right wheel velocity : 20
-
-Second video output:
+**Second video output:**
 
 ![Alt Text](gif/gazebo2-resize.gif)
 ![Alt Text](gif/pygame2-resize.gif)
