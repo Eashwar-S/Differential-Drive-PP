@@ -147,12 +147,30 @@ rosrun turtlebot_astar talker.py
 to read necessary parameters.
 
 ### Video output:
+First video Parameters:
+
+Start coordinates: (-4,-3)   Start orientation: 0  Goal coordinates: (0,-3)
+
+clearance: 0.3   dt = 0.6    smoothing coefficient = 0.2
+
+Left wheel velocity : 20     Right wheel velocity : 20
+
 First video output:
 
-![Alt Text](https://media.giphy.com/media/RetqYlXdgvC9jp7bNi/giphy.gif)
+![alt-text-1](gif/gazebo-resize.gif) 
+![alt-text-2](gif/python1-resize.gif)
+
+Second video Parameters:
+
+Start coordinates: (-4,-4)  Start orientation: 0  Goal coordinates: (4,2.5)
+
+clearance: 0.3  dt = 0.8  smoothing coefficient = 0.1
+
+Left wheel velocity : 20   Right wheel velocity : 20
 
 Second video output:
 
-![Alt Text](https://media.giphy.com/media/IzvZd5AA6cNqQu8nVr/giphy.gif)
+![Alt Text](gif/gazebo2-resize.gif)
+![Alt Text](gif/pygame2-resize.gif)
 
 To access full video please click on this [link](https://drive.google.com/drive/folders/1r2lyCS7f3MUi0458xqHsil_6RG9Ynp4d?usp=sharing)
