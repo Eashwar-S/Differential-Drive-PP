@@ -103,7 +103,7 @@ Enter Time step or negative value for default paramater
 ### SAMPLE OUTPUT 
 
 
-![Alt Text](https://media.giphy.com/media/dzPjNu7rUM6TUqEVcK/giphy.gif)
+![Alt Text](gif/phase3.gif)
 # Phase-4:
 In phase 4, we implement A* algorithm on turtlebot by simulating it on gazebo using ROS.
 

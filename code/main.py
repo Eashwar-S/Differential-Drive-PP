@@ -48,43 +48,43 @@ def writeParametersForGazebo(dt,is1,is2,iorientation):
 #------------------------------
 #  Getting user Inputs
 #------------------------------
-# clearance = 0
-# print('Robot considered is Turtlebot 2:')
-# print("Enter cleareance")
-# clearance = float(input())
+clearance = 0
+print('Robot considered is Turtlebot 2:')
+print("Enter cleareance")
+clearance = float(input())
 
-# print('Enter start location s1 between -5 and 5')
-# is1 = float(input())
-# print('Enter start location s2 between -5 and 5')
-# is2 = float(input())
-# print('Enter the angle of the robot in degrees')
-# istartOrientation = float(input())
+print('Enter start location s1 between -5 and 5')
+is1 = float(input())
+print('Enter start location s2 between -5 and 5')
+is2 = float(input())
+print('Enter the angle of the robot in degrees')
+istartOrientation = float(input())
 
-# print('Enter goal location g1 between -5 and 5')
-# ig1 = float(input())
-# print('Enter goal location g2 between -5 and 5')
-# ig2 = float(input())
+print('Enter goal location g1 between -5 and 5')
+ig1 = float(input())
+print('Enter goal location g2 between -5 and 5')
+ig2 = float(input())
 
-# print('Enter left wheel rotational velocity')
-# iul = float(input())
-# print('Enter right wheel rotational velocity')
-# iur = float(input())
+print('Enter left wheel rotational velocity')
+iul = float(input())
+print('Enter right wheel rotational velocity')
+iur = float(input())
 
-# print('Enter smooth Coef or negative value for default paramater')
-# ismoothCoef = float(input())
+print('Enter smooth Coef or negative value for default paramater')
+ismoothCoef = float(input())
 
-# print('Enter Time step or negative value for default paramater')
-# idt = float(input())
+print('Enter Time step or negative value for default paramater')
+idt = float(input())
 
-iul = 20
-iur = 20
-is1 = -4#-4  #-4   
-is2 = -3#-4  #-3     
-ig1 = 0#4   #0       
-ig2 = -3#2.5  #-3    
-istartOrientation = 0
-idt = -1#0.6 #0.8
-ismoothCoef = -1# 0.2 #0.1
+# iul = 20
+# iur = 20
+# is1 = -4#-4  #-4   
+# is2 = -4#-4  #-3     
+# ig1 = 4#4   #0       
+# ig2 = 2.5#2.5  #-3    
+# istartOrientation = 0
+# idt = -1#0.6 #0.8
+# ismoothCoef = -1# 0.2 #0.1
 
 #---------------------------------
 # Inputs From World Coordinates 
