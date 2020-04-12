@@ -123,7 +123,7 @@ Follow the instructions in phase 3 to run the Astar code.
 cd Differential-Drive-PP
 python3 code/main.py
 ```
-**run the code in the Differential-Drive-PP directory**.The code will not work as we are using relative path to files
+**run the code in the Differential-Drive-PP directory**.The code will not work if run in any other directory as we are using relative path to files
 to read necessary parameters.
 
 Now change the python version to python 2.7
@@ -134,17 +134,6 @@ cd ..
 source catkin_ws/devel/setup.bash
 rosrun turtlebot_astar run.sh
 ```
-**run the code in the Differential-Drive-PP directory**.The code will not work as we are using relative path to files
-to read necessary parameters.
-
-Now open another terminal and run the following code.
-```
-cd Differential-Drive-PP
-source catkin_ws/devel/setup.bash 
-rosrun turtlebot_astar talker.py 
-```
-**run the code in the Differential-Drive-PP directory**.The code will not work as we are using relative path to files
-to read necessary parameters.
 
 ### Video output:
 To test the results of pygame on turtlebot,**different smoothing coefficient and time step** was used as opposed to the default setup. 
